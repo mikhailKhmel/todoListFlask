@@ -83,7 +83,7 @@ def add_newuser():
         c.execute('insert into Users (id, Login, Password, todoList) values (?,?,?,?)',
                   [str(new_id), str(login), str(password), new_todolist])
         db.commit()
-        c.execute('CREATE TABLE "' + new_todolist + '" ("done" INTEGER, "text" TEXT, "date" TEXT)')
+        c.execute('CREATE TABLE "' + new_todolist + '" ("id" INTEGER, "done" INTEGER, "text" TEXT, "date" TEXT)')
         db.close()
         return 'added new user and created new todo list'
 
