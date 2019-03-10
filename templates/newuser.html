@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your To-Do List</title>
+</head>
+<body>
+<h1>Новый пользователь</h1>
+
+<form action="{{ url_for('add_newuser') }}" method="post">
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <input type="submit" value="Add User">
+</form>
+
+</body>
+</html>
