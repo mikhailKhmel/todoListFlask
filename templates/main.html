@@ -2,26 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Your To-Do List</title>
 </head>
 <body>
 <h1>To-Do List</h1>
 <hr>
 {% block content %}
+    {% if user_list|length %}
+        <form action="{{ url_for('save_tasks') }}" method="post">
+            {% for task in user_list %}
+                {% if task[1] != 1 %}
+                    <input type="checkbox" name="done{{ task[0] }}" value="Сделано"><br>
+                    <textarea name="task{{ task[0] }}">{{ task[2] }}</textarea><br>
+                    <input type="datetime-local" name="date{{ task[0] }}" value="{{ task[3] }}"><br>
+                {% endif %}
 
-    <form action="{{ url_for('save_tasks') }}" method="post">
-        {% for task in user_list %}
-            {% if task[1] != 1 %}
-                <input type="checkbox" name="done{{ task[0] }}" value="Сделано"><br>
-                <textarea name="task{{ task[0] }}">{{ task[2] }}</textarea><br>
-                <input type="datetime" name="date{{ task[0] }}" value="{{ task[3] }}"><br>
-            {% endif %}
+                <hr>
+            {% endfor %}
+            <input type="submit" value="Сохранить изменения">
 
-            <hr>
-        {% endfor %}
-        <input type="submit" value="Сохранить изменения">
-
-    </form>
+        </form>
+    {% else %}
+        <h3>Список задач пуст :с</h3>
+    {% endif %}
 {% endblock %}
 <hr>
 
